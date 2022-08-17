@@ -50,7 +50,7 @@
         );
 
         /* Start table */
-        for(let i=0; i < dataServer.name.length; i++){
+        for( let i = 0; i < dataServer.name.length; i ++ ){
             let tBody = document.getElementById('table-body');
             
             let tr = `<tr>
