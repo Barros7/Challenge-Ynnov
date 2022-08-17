@@ -20,8 +20,10 @@ class StatisticLoginUserController extends Controller
         $data = [];
 
         foreach($users as $user){
-            $data['nameUser'][] = $user->name;
-            $data['qtdLogin'][] = $user->login_counter;
+            $data['id'][] = $user->id;
+            $data['name'][] = $user->name;
+            $data['email'][] = $user->email;
+            $data['data'][] = $user->login_counter;
         }
 
         $data['data'] = json_encode($data);

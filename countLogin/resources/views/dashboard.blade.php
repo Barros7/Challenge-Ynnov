@@ -18,30 +18,7 @@
                         </tr>
                     </thead>
                     <tbody id="table-body">
-                        <tr>
-                            <th scope="col">1</th>
-                            <th scope="col">José</th>
-                            <th scope="col">jose@gmail.com</th>
-                            <th scope="col">4</th>
-                        </tr>
-                        <tr>
-                            <th scope="col">2</th>
-                            <th scope="col">Jacob</th>
-                            <th scope="col">jacob@gmail.com</th>
-                            <th scope="col">7</th>
-                        </tr>
-                        <tr>
-                            <th scope="col">3</th>
-                            <th scope="col">Barros</th>
-                            <th scope="col">barros@gmail.com</th>
-                            <th scope="col">11</th>
-                        </tr>
-                        <tr>
-                            <th scope="col">4</th>
-                            <th scope="col">Bongo</th>
-                            <th scope="col">bongo@gmail.com</th>
-                            <th scope="col">18</th>
-                        </tr>
+                       
                     </tbody>
                 </table>
             </div>
@@ -53,11 +30,11 @@
         let dataServer = JSON.parse(`<?php echo $data ?>`);
 
         const data = {
-             labels: dataServer['nameUser'],
+             labels: dataServer['name'],
              datasets: [{
                  label: 'Quantidade de login por utilizadores',
                  backgroundColor: 'blue',
-                 data: dataServer['qtdLogin'],
+                 data: dataServer['data'],
             }]
         };
     
@@ -71,5 +48,20 @@
             document.getElementById('myChart'),
             config
         );
+
+        /* Start table */
+        //console.log(dataServer);
+        for(let i=0; i < dataServer.data.length; i++){
+            let tBody = document.getElementById('table-body');
+            console.log(dataServer.name[i]);
+            let tr = `<tr>
+                          <th scope="col">${dataServer.id[i]}</th>
+                          <th scope="col">${dataServer.name[i]}</th>
+                          <th scope="col">${dataServer.email[i]}</th>
+                          <th scope="col">${dataServer.data[i]}</th>
+                      </tr>`;
+            
+            tBody.insertAdjacentHTML('beforeend', String(tr));
+        }
     </script>
 </x-app-layout>
