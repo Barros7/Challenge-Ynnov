@@ -21,26 +21,26 @@
                         <tr>
                             <th scope="col">1</th>
                             <th scope="col">José</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Qtd de Login</th>
+                            <th scope="col">jose@gmail.com</th>
+                            <th scope="col">4</th>
                         </tr>
                         <tr>
                             <th scope="col">2</th>
-                            <th scope="col">José</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Qtd de Login</th>
+                            <th scope="col">Jacob</th>
+                            <th scope="col">jacob@gmail.com</th>
+                            <th scope="col">7</th>
                         </tr>
                         <tr>
                             <th scope="col">3</th>
-                            <th scope="col">José</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Qtd de Login</th>
+                            <th scope="col">Barros</th>
+                            <th scope="col">barros@gmail.com</th>
+                            <th scope="col">11</th>
                         </tr>
                         <tr>
                             <th scope="col">4</th>
-                            <th scope="col">José</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Qtd de Login</th>
+                            <th scope="col">Bongo</th>
+                            <th scope="col">bongo@gmail.com</th>
+                            <th scope="col">18</th>
                         </tr>
                     </tbody>
                 </table>

@@ -10,7 +10,7 @@ table {
     width: 100%;
   }
   
-  th, td {
-    text-align: left;
-    padding: 2px;
+  th {
+    text-align: center;
+    padding: 2px 10px;
   }
