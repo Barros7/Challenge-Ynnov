@@ -18,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody id="table-body">
-                       
+                        <!-- The values of table, render here! -->
                     </tbody>
                 </table>
             </div>
@@ -50,10 +50,9 @@
         );
 
         /* Start table */
-        //console.log(dataServer);
-        for(let i=0; i < dataServer.data.length; i++){
+        for(let i=0; i < dataServer.name.length; i++){
             let tBody = document.getElementById('table-body');
-            console.log(dataServer.name[i]);
+            
             let tr = `<tr>
                           <th scope="col">${dataServer.id[i]}</th>
                           <th scope="col">${dataServer.name[i]}</th>
