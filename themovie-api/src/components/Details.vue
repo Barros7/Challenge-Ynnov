@@ -24,7 +24,7 @@
 /* Em testessssssssss */
   import axios from 'axios';
   const MY_KEY = '7ae0d6972de076eeac5a490626643a5f';
-  const url = `https://api.themoviedb.org/3/movie/${id_movie}?api_key=${MY_KEY}&append_to_response=videos`;
+  const url = `https://api.themoviedb.org/3/movie/${id_movie}?api_key=${MY_KEY}&append_to_response=query`;
 
   export default {
     name: 'MySearch',
