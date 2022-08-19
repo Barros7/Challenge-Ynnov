@@ -51,7 +51,6 @@
             details: '',
             key_video: '',
             language: '',
-            idT: this.id
       }
     },
       created() {

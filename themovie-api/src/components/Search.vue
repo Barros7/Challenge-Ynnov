@@ -33,7 +33,7 @@
           <h5 class="card-title">{{result.title}}</h5>
           <p class="card-text">{{result.overview}}</p>
           <p>{{id}}</p>
-          <button @click="this.id = result.id">Assistir</button>
+          <button @click="this.id = result.id" class="btn btn-info">Assistir</button>
         </div>
       </div>
     </div>
