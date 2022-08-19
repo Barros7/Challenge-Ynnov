@@ -56,7 +56,7 @@
   export default {
     name: 'MySearch',
     components: {
-      Watch
+        Watch,
     },
     data () {
       return {

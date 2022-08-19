@@ -1,68 +1,97 @@
 <template>
-<div class="container-fluid">
-    <div class="row cover" :style="{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${details.backdrop_path})` }">
-        <div class="row">
-            <div class="col-4">
-                <div class="embed-responsive embed-responsive-16by9 m-4">
-                    <iframe class="embed-responsive-item" :src="`https://www.youtube.com/embed/${key_video}`" allowfullscreen></iframe>
-                </div>
-            </div>
-            <div class="col-8">
-                <div class="m-4 details">
-                    <h1 class="details-bg px-3">{{details.original_title}}</h1>
-                    <p class="details-bg px-3">{{details.popularity}}:</p>
-                    <p class="details-bg px-3">{{language}}</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8">
-                <p class="description p-3 ms-4">{{details.overview}}</p>
-            </div>
+    <div class="container-fluid">
+        <div class="row cover" :style="{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${details.backdrop_path})` }">
+            <div class="row">
                 <div class="col-4">
-                    <img
-                        :src="`https://image.tmdb.org/t/p/w500${details.poster_path}`"
-                        :alt="details.title"
-                        :title="details.title"
-                        height="300"
-                        width="200"
-                        class="card-img-top"
-                        :loading=" index === 0 ? 'eager' : 'lazy'"
-                        draggable="false"
-                    />  
+                    <div class="embed-responsive embed-responsive-16by9 m-4">
+                        <iframe class="embed-responsive-item" :src="`https://www.youtube.com/embed/${key_video}`" allowfullscreen></iframe>
+                    </div>
                 </div>
+                <div class="col-8">
+                    <div class="m-4 details">
+                        <h1 class="details-bg px-3">{{details.original_title}}</h1>
+                        <p class="details-bg px-3">Popularidade: {{details.popularity}}</p>
+                        <p class="details-bg p-2">Idioma: {{language}} | Tempporadas: {{details.number_of_seasons}} | Episódios: {{details.number_of_episodes}}</p>
+                        <div v-if="category==='tv'" class="row px-3">
+                            <p class="details-bg px-3"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <p class="description p-3 ms-4">{{details.overview}}</p>
+                </div>
+                    <div class="col-4">
+                        <img
+                            :src="`https://image.tmdb.org/t/p/w500${details.poster_path}`"
+                            :alt="details.title"
+                            :title="details.title"
+                            height="300"
+                            width="200"
+                            class="card-img-top"
+                            :loading=" index === 0 ? 'eager' : 'lazy'"
+                            draggable="false"
+                        />  
+                </div>
+            </div>
+            <div v-if="category==='tv'"  class="row px-3">
+                <div v-for='serie in series' :key='serie.id' class="card p-2 mx-2 my-4 col-4" style="width: 32%;">
+                    <div class="card-body text-white bg-dark">
+                        <img
+                            :src="`https://image.tmdb.org/t/p/w500${serie.poster_path}`"
+                            :alt="serie.name"
+                            :title="serie.name"
+                            height="300"
+                            width="200"
+                            class="card-img-top"
+                            :loading=" index === 0 ? 'eager' : 'lazy'"
+                            draggable="false"
+                        />
+                        <div class="card-body text-white bg-dark">
+                            <h1 class="card-title">{{serie.name}}</h1>
+                            <h4 class="card-text">Temporada: {{serie.season_number}}</h4>
+                            <h5 class="card-text">Episodios: {{serie.episode_count}}</h5>
+                            <p class="card-text">Lançamento: {{serie.air_date}}</p>
+                            <p class="card-text">{{serie.overview}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 </template>
 <script>
-    import axios from 'axios';
-    let MY_KEY = '7ae0d6972de076eeac5a490626643a5f';
-    let url = `https://api.themoviedb.org/3/`;
-
+  import axios from 'axios';
+  let MY_KEY = '7ae0d6972de076eeac5a490626643a5f';
+  let url = `https://api.themoviedb.org/3/`;
   export default {
-    name: 'MyWatch',
+    name: "MyWatch",
     props: {
         id: Number,
         category: String
     },
-    data () { 
+    data() {
         return {
-            details: '',
-            key_video: '',
-            language: '',
-      }
+            details: "",
+            key_video: "",
+            language: "",
+            series: ""
+        };
     },
-      created() {
-            axios.get(`${url}${this.category}/${this.id}?api_key=${MY_KEY}&append_to_response=videos`).then( response => { 
+    created() {
+        axios.get(`${url}${this.category}/${this.id}?api_key=${MY_KEY}&append_to_response=videos`).then(response => {
             this.details = response.data;
             this.key_video = response.data.videos.results[0].key;
             this.language = response.data.spoken_languages[0].english_name;
-
+            this.series = response.data.seasons;
             console.log("#######################");
-        })
-      }
-  }
+            console.log(this.series);
+            console.log("#######################");
+            console.log("#######################");
+        });
+    },
+}
 </script>
 <style>
     iframe {
