@@ -12,7 +12,6 @@
                     <h1 class="details-bg px-3">{{details.original_title}}</h1>
                     <p class="details-bg px-3">{{details.popularity}}:</p>
                     <p class="details-bg px-3">{{language}}</p>
-                    <p class="details-bg px-3">{{id}}</p>
                 </div>
             </div>
         </div>
@@ -39,12 +38,13 @@
 <script>
     import axios from 'axios';
     let MY_KEY = '7ae0d6972de076eeac5a490626643a5f';
-    let url = `https://api.themoviedb.org/3/movie/`;
+    let url = `https://api.themoviedb.org/3/`;
 
   export default {
     name: 'MyWatch',
     props: {
-        id: Number
+        id: Number,
+        category: String
     },
     data () { 
         return {
@@ -54,7 +54,7 @@
       }
     },
       created() {
-            axios.get(`${url}${this.id}?api_key=${MY_KEY}&append_to_response=videos`).then( response => { 
+            axios.get(`${url}${this.category}/${this.id}?api_key=${MY_KEY}&append_to_response=videos`).then( response => { 
             this.details = response.data;
             this.key_video = response.data.videos.results[0].key;
             this.language = response.data.spoken_languages[0].english_name;
