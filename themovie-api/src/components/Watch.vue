@@ -55,9 +55,7 @@
       }
     },
       created() {
-        
-        console.log("######### Yheaaaab",this.id)
-        axios.get(`${url}${this.id}?api_key=${MY_KEY}&append_to_response=videos`).then( response => { 
+            axios.get(`${url}${this.id}?api_key=${MY_KEY}&append_to_response=videos`).then( response => { 
             this.details = response.data;
             this.key_video = response.data.videos.results[0].key;
             this.language = response.data.spoken_languages[0].english_name;
