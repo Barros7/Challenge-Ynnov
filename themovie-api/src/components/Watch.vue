@@ -36,26 +36,24 @@
 </div>
 </template>
 <script>
-  import axios from 'axios';
-
-  //const MY_KEY = '7ae0d6972de076eeac5a490626643a5f';
-  //const url = `https://api.themoviedb.org/3/movie/`;
+    import axios from 'axios';
+    let MY_KEY = '7ae0d6972de076eeac5a490626643a5f';
+    let url = `https://api.themoviedb.org/3/movie/`;
 
   export default {
-    name: 'MyWatch',
+      name: 'MyWatch',
     props: {
-      id: Number
+        id: Number
     },
     data () { 
-      return {
-        details: '',
-        key_video: '',
-        language: ''
+        return {
+            details: '',
+            key_video: '',
+            language: ''
       }
     },
       created() {
-        //let idAndKey = `${this.id}?api_key=${MY_KEY}&language=en-US`;
-        axios.get("https://api.themoviedb.org/3/movie/76122?api_key=7ae0d6972de076eeac5a490626643a5f&append_to_response=videos").then( response => { 
+        axios.get(`${url}${this.id}?api_key=${MY_KEY}&append_to_response=videos`).then( response => { 
             this.details = response.data;
             this.key_video = response.data.videos.results[0].key;
             this.language = response.data.spoken_languages[0].english_name;
