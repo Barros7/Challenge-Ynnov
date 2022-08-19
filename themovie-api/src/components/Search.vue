@@ -2,18 +2,18 @@
   <div class="container">
     <header class="bg-dark">
       <nav class="navbar navbar-dark bg-dark p-4">
-      <a class="navbar-brand">Consumo API TMDB</a>
-      <div class="form-check form-check-inline">
-        <input v-model="category"  class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="movie">
-        <label class="form-check-label" for="inlineRadio1">Filmes</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input v-model="category" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="tv">
-        <label class="form-check-label" for="inlineRadio2">Serie</label>
-      </div>        
-        <div>
-          <input v-model='query' @keyup='getResult(query)' class="form-control me-2" type="search" placeholder="Pesquisar filme ou serie" aria-label="Search">
+        <a class="navbar-brand">Consumo API TMDB</a>
+        <div class="form-check form-check-inline">
+          <input v-model="category"  class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="movie">
+          <label class="form-check-label" for="inlineRadio1">Filmes</label>
         </div>
+        <div class="form-check form-check-inline">
+          <input v-model="category" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="tv">
+          <label class="form-check-label" for="inlineRadio2">Séries</label>
+        </div>        
+          <div>
+            <input v-model='query' @keyup='getResult(query)' class="form-control me-2" type="search" placeholder="Pesquisar filme ou serie" aria-label="Search">
+          </div>
       </nav>
     </header>
     <div class="row px-3">
@@ -35,15 +35,20 @@
         </div>
       </div>
     </div>
+    <Watch :id="253980"/>
   </div>
 </template>
 
 <script>
   import axios from 'axios';
+  import Watch from './Watch.vue';
   const MY_KEY = '7ae0d6972de076eeac5a490626643a5f';
   const url = `https://api.themoviedb.org/3/search/`;
   export default {
     name: 'MySearch',
+    components: {
+      Watch
+    },
     data () {
       return {
         query: '',
@@ -65,7 +70,7 @@
   }
 </script>
 <style>
-label {
-  color: aliceblue;
-}
+  label {
+    color: aliceblue;
+  }
 </style>

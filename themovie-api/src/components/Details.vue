@@ -24,10 +24,11 @@
 /* Em testessssssssss */
   import axios from 'axios';
   const MY_KEY = '7ae0d6972de076eeac5a490626643a5f';
+  const id_movie = 80;
   const url = `https://api.themoviedb.org/3/movie/${id_movie}?api_key=${MY_KEY}&append_to_response=query`;
 
   export default {
-    name: 'MySearch',
+    name: 'MyDetails',
     data () {
       return {
       query: '',
@@ -35,7 +36,7 @@
       }
     },
     methods: {
-      getResult(query) {
+      created() {
       axios.get(url + query).then(response => { this.results = response.data.results })
         console.log(this.results);
       }
