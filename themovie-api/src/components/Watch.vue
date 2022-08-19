@@ -12,6 +12,7 @@
                     <h1 class="details-bg px-3">{{details.original_title}}</h1>
                     <p class="details-bg px-3">{{details.popularity}}:</p>
                     <p class="details-bg px-3">{{language}}</p>
+                    <p class="details-bg px-3">{{id}}</p>
                 </div>
             </div>
         </div>
@@ -41,7 +42,7 @@
     let url = `https://api.themoviedb.org/3/movie/`;
 
   export default {
-      name: 'MyWatch',
+    name: 'MyWatch',
     props: {
         id: Number
     },
@@ -49,10 +50,13 @@
         return {
             details: '',
             key_video: '',
-            language: ''
+            language: '',
+            idT: this.id
       }
     },
       created() {
+        
+        console.log("######### Yheaaaab",this.id)
         axios.get(`${url}${this.id}?api_key=${MY_KEY}&append_to_response=videos`).then( response => { 
             this.details = response.data;
             this.key_video = response.data.videos.results[0].key;

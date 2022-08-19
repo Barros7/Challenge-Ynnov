@@ -29,13 +29,15 @@
             draggable="false"
         />
         <div class="card-body text-white bg-dark">
+          <h5 class="card-title">{{result.id}}</h5>
           <h5 class="card-title">{{result.title}}</h5>
           <p class="card-text">{{result.overview}}</p>
-          <a :to="`/movie/${result.id}`" class="btn btn-primary">Assistir</a>
+          <p>{{id}}</p>
+          <button @click="this.id = result.id">Assistir</button>
         </div>
       </div>
     </div>
-    <Watch :id="253980"/>
+    <Watch :id="id" :category="category"/>
   </div>
 </template>
 
@@ -54,6 +56,7 @@
         query: '',
         category: '',
         results: '',
+        id: 576
       }
     },
     methods: {
@@ -61,9 +64,7 @@
         let category = `${this.category}?api_key=${MY_KEY}&query=`;
         axios.get(url + category + query).then( response => { 
           this.results = response.data.results;
-          console.log(this.category);
-          //console.log("#########################");
-          //console.log(category+query);
+          console.log("#########################");
         })
       }
     }
