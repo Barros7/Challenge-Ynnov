@@ -1,12 +1,14 @@
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <div v-if="toogle == false">
             <MySearch/>
         </div>
         <div v-else class="row cover" :style="{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${details.backdrop_path})` }">
-            <button v-on:click="toogle =! toogle">
-                Home
-            </button>
+            <div class="mx-4 mt-3">
+                <button v-on:click="toogle =! toogle">
+                    Back
+                </button>
+            </div>
             <div class="row">
                 <div class="col-12 col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                     <div class="embed-responsive embed-responsive-16by9 m-4">
