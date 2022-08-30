@@ -1,6 +1,12 @@
 <template>
-    <div class="container-fluid">
-        <div class="row cover" :style="{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${details.backdrop_path})` }">
+    <div class="container">
+        <div v-if="toogle == false">
+            <MySearch/>
+        </div>
+        <div v-else class="row cover" :style="{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${details.backdrop_path})` }">
+            <button v-on:click="toogle =! toogle">
+                Home
+            </button>
             <div class="row">
                 <div class="col-12 col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                     <div class="embed-responsive embed-responsive-16by9 m-4">
@@ -63,10 +69,14 @@
 </template>
 <script>
   import axios from 'axios';
+  import MySearch from './Search.vue';
   let MY_KEY = '7ae0d6972de076eeac5a490626643a5f';
   let url = `https://api.themoviedb.org/3/`;
   export default {
     name: "MyWatch",
+    components: {
+        MySearch
+    },
     props: {
         id: Number,
         category: String
@@ -76,7 +86,8 @@
             details: "",
             key_video: "",
             language: "",
-            series: ""
+            series: "",
+            toogle: true
         };
     },
     created() {
