@@ -56,7 +56,7 @@
                             :loading=" index === 0 ? 'eager' : 'lazy'"
                             draggable="false"
                         />
-                        <div class="card-body text-white bg-dark">
+                        <div class="card-body text-white bg-da${url}${this.category}/${this.id}?api_key=${MY_KEY}&append_to_response=videosrk">
                             <h1 class="card-title">{{serie.name}}</h1>
                             <h4 class="card-text">Temporada: {{serie.season_number}}</h4>
                             <h5 class="card-text">Episodios: {{serie.episode_count}}</h5>
@@ -73,6 +73,7 @@
   import axios from 'axios';
   import MySearch from './Search.vue';
   let MY_KEY = '7ae0d6972de076eeac5a490626643a5f';
+  let Google_API_Key = 'AIzaSyBKMqSak9V9hly7CvKD-skWhXkVbjW2M9E';
   let url = `https://api.themoviedb.org/3/`;
   export default {
     name: "MyWatch",
@@ -99,7 +100,16 @@
             this.language = response.data.spoken_languages[0].english_name;
             this.series = response.data.seasons;
             console.log("#######################");
-            console.log(this.series);
+            console.log("#######################");
+            console.log("#######################");
+            console.log(this.details);
+        });
+
+        axios.get(`https://maps.googleapis.com/maps/api/js?key=${Google_API_Key}&callback=initMap`).then(response => {
+            this.details = response.data;
+            console.log("#######################");
+            console.log("#######################");
+            console.log("#######################");
         });
     },
 }

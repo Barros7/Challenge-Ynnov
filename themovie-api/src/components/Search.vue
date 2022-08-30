@@ -73,11 +73,13 @@
     },
     methods: {
       getResult(query) {
-        let category = `${this.category}?api_key=${MY_KEY}&query=`;
-        axios.get(url + category + query).then( response => { 
-          this.results = response.data.results;
-          console.log("#########################");
-        })
+        setTimeout(() => {
+          let category = `${this.category}?api_key=${MY_KEY}&query=`;
+          axios.get(url + category + query).then( response => { 
+            this.results = response.data.results;
+            console.log("#########################");
+          })
+        }, 3000);
       }
     }
   }
