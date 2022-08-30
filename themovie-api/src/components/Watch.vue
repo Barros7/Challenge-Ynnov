@@ -2,12 +2,12 @@
     <div class="container-fluid">
         <div class="row cover" :style="{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${details.backdrop_path})` }">
             <div class="row">
-                <div class="col-12 col-xs-12 col-sm-6">
+                <div class="col-12 col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                     <div class="embed-responsive embed-responsive-16by9 m-4">
                         <iframe class="embed-responsive-item" :src="`https://www.youtube.com/embed/${key_video}`" allowfullscreen></iframe>
                     </div>
                 </div>
-                <div class="col-12 col-xs-12 col-sm-6">
+                <div class="col-12 col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                     <div class="m-4 details">
                         <h1 class="details-bg px-3">{{details.original_title}}</h1>
                         <p class="details-bg px-3">Popularidade: {{details.popularity}}</p>
@@ -19,10 +19,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                     <p class="description p-3 ms-4">{{details.overview}}</p>
                 </div>
-                    <div class="col-12 col-xs-12 col-sm-6 ">
+                <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-5">
                         <img
                             :src="`https://image.tmdb.org/t/p/w500${details.poster_path}`"
                             :alt="details.title"
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div v-if="category==='tv'"  class="row px-3">
-                <div v-for='serie in series' :key='serie.id' class="card p-2 mx-2 my-4 col-4" style="width: 32%;">
+                <div v-for='serie in series' :key='serie.id' class="card p-2 my-4 col-12 col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
                     <div class="card-body text-white bg-dark">
                         <img
                             :src="`https://image.tmdb.org/t/p/w500${serie.poster_path}`"
