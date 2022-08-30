@@ -87,8 +87,6 @@
             this.series = response.data.seasons;
             console.log("#######################");
             console.log(this.series);
-            console.log("#######################");
-            console.log("#######################");
         });
     },
 }
