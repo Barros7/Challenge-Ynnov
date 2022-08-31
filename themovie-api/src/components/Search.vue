@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <div v-if="id==''">
       <header class="bg-dark">
         <nav class="navbar navbar-dark bg-dark p-4">
@@ -32,7 +32,6 @@
           height="300"
           width="200"
           class="card-img-top"
-          :loading=" index === 0 ? 'eager' : 'lazy'"
           draggable="false"
           />
           <div class="card-body text-white bg-dark">
@@ -57,7 +56,6 @@
     </div>
   </div>
 </template>
-
 <script>
   import axios from 'axios';
   import Watch from './Watch.vue';
@@ -81,16 +79,13 @@
     methods: {
       getResult(query) {
         clearTimeout(this.timer);
-        console.log("########### estágio 1 Capturando o evento keyUp", query);
         let category = `${this.category}?api_key=${MY_KEY}&query=`;
         this.timer = setTimeout(() => {
-          console.log("########### estágio 2 Capturando o evento keyUp", query);
           axios.get(url + category + query).then( response => { 
             this.results = response.data.results;
             this.loading = false
           });
-        }, 2000);
-        console.log("########### estágio 3 Capturando o evento keyUp", query);
+        }, 1000);
       }
     }
   }
