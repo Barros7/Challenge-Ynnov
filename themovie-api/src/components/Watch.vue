@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid">
-        <div v-if="toogle == false">
+        <div v-if="!toogle">
             <MySearch/>
         </div>
         <div v-else class="row cover" :style="{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${details.backdrop_path})` }">
