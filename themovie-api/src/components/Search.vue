@@ -68,18 +68,22 @@
         query: '',
         category: '',
         results: '',
-        id: ''
+        id: '',
+        timer: undefined
       }
     },
     methods: {
       getResult(query) {
-        setTimeout(() => {
-          let category = `${this.category}?api_key=${MY_KEY}&query=`;
+        clearTimeout(this.timer);
+        console.log("########### estágio 1 Capturando o evento keyUp", query);
+        let category = `${this.category}?api_key=${MY_KEY}&query=`;
+        this.timer = setTimeout(() => {
+          console.log("########### estágio 2 Capturando o evento keyUp", query);
           axios.get(url + category + query).then( response => { 
             this.results = response.data.results;
-            console.log("#########################");
-          })
-        }, 3000);
+          });
+        }, 2000);
+        console.log("########### estágio 3 Capturando o evento keyUp", query);
       }
     }
   }

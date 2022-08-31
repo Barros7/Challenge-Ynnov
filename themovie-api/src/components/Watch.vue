@@ -19,11 +19,14 @@
                     <div class="m-4 details">
                         <h1 class="details-bg px-3">{{details.original_title}}</h1>
                         <p class="details-bg px-3">Popularidade: {{details.popularity}}</p>
-                        <p class="details-bg p-2">Idioma: {{language}} | Tempporadas: {{details.number_of_seasons}} | Episódios: {{details.number_of_episodes}}</p>
+                        <p class="details-bg p-2">Idioma: {{language}} | País de origem: {{origin_country}}</p>
                         <div v-if="category==='tv'" class="row px-3">
-                            <p class="details-bg px-3"></p>
+                            <p class="details-bg px-3">Tempporadas: {{details.number_of_seasons}} | Episódios: {{details.number_of_episodes}}</p>
                         </div>
                     </div>
+                </div>
+                <div class="col-12 mb-4 mx-4">
+                    <MyDetails />
                 </div>
             </div>
             <div class="row">
@@ -72,14 +75,16 @@
 <script>
   import axios from 'axios';
   import MySearch from './Search.vue';
+  import MyDetails from './Details.vue';
   let MY_KEY = '7ae0d6972de076eeac5a490626643a5f';
   let Google_API_Key = 'AIzaSyBKMqSak9V9hly7CvKD-skWhXkVbjW2M9E';
   let url = `https://api.themoviedb.org/3/`;
   export default {
     name: "MyWatch",
     components: {
-        MySearch
-    },
+    MySearch,
+    MyDetails
+},
     props: {
         id: Number,
         category: String
@@ -90,24 +95,21 @@
             key_video: "",
             language: "",
             series: "",
+            origin_country: '',
             toogle: true
         };
     },
-    created() {
+    mounted() {
         axios.get(`${url}${this.category}/${this.id}?api_key=${MY_KEY}&append_to_response=videos`).then(response => {
             this.details = response.data;
             this.key_video = response.data.videos.results[0].key;
             this.language = response.data.spoken_languages[0].english_name;
+            this.origin_country = response.data.origin_country[0];
             this.series = response.data.seasons;
-            console.log("#######################");
-            console.log("#######################");
-            console.log("#######################");
-            console.log(this.details);
         });
 
         axios.get(`https://maps.googleapis.com/maps/api/js?key=${Google_API_Key}&callback=initMap`).then(response => {
             this.details = response.data;
-            console.log("#######################");
             console.log("#######################");
             console.log("#######################");
         });
