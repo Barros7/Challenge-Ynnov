@@ -10,7 +10,7 @@
         </div>
         <div v-else class="row cover" :style="{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${details.backdrop_path})` }">
             <div class="mx-4 mt-3">
-                <button v-on:click="toogle = false">
+                <button v-on:click="toogle =! toogle">
                     Back
                 </button>
             </div>

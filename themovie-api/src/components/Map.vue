@@ -24,7 +24,13 @@
     name: 'GoogleMap',
     data() {
       return {
-        center: {lat: 51.093048, lng: 6.842120},
+        load: {
+          region: 'VI',
+          language: 'vi',
+        },
+        center: {
+          lat: 51.093048,
+          lng: 6.842120},
         markers: [
           {
           position: {
