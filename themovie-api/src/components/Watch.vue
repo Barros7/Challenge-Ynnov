@@ -1,7 +1,7 @@
 <template>
     <div v-if="loading && !key_video" class="text-center">
         <h1 class="mt-2">
-            Loading ...
+            Loading...
         </h1>
     </div>
     <div v-else class="row cover" :style="{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${details.backdrop_path})` }">
