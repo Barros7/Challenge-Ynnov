@@ -11,4 +11,10 @@ app.use(VueGoogleMaps, {
         key: 'AIzaSyBqZ-4dF9WECmuV4Y4crOyzUFwt8G-9F30',
     },
 }).mount('#app')
-import "bootstrap/dist/js/bootstrap.js"
+import "bootstrap/dist/js/bootstrap.js";
+
+/*
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&region=GB&callback=initMap">
+    </script>
+*/

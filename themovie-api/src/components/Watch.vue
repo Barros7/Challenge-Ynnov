@@ -1,74 +1,69 @@
 <template>
-    <div v-if="!toogle">
-        <App />
+    <div v-if="loading && !key_video" class="text-center">
+        <h1 class="mt-2">
+            Loading ...
+        </h1>
     </div>
-    <div v-else>
-        <div v-if="loading && !key_video" class="text-center">
-            <h1 class="mt-2">
-                Loading ...
-            </h1>
+    <div v-else class="row cover" :style="{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${details.backdrop_path})` }">
+        <div class="mx-4 mt-3">
+            <button v-on:click="loadMainPage()">
+                Back
+            </button>
         </div>
-        <div v-else class="row cover" :style="{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${details.backdrop_path})` }">
-            <div class="mx-4 mt-3">
-                <button v-on:click="toogle =! toogle">
-                    Back
-                </button>
-            </div>
-            <div class="row">
-                <div class="col-12 col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-                    <div class="embed-responsive embed-responsive-16by9 m-4">
-                        <iframe class="embed-responsive-item" :src="`https://www.youtube.com/embed/${key_video}`" allowfullscreen></iframe>
-                    </div>
-                </div>
-                <div class="col-12 col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-                    <div class="m-4 details">
-                        <h1 class="details-bg px-3">{{details.original_title}}</h1>
-                        <p class="details-bg px-3">Popularidade: {{details.popularity}}</p>
-                        <p class="details-bg p-2">Idioma: {{language}} | País de origem: {{origin_country}}</p>
-                        <div v-if="category==='tv'" class="row px-3">
-                            <p class="details-bg px-3">Tempporadas: {{details.number_of_seasons}} | Episódios: {{details.number_of_episodes}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xs-12 col-sm-12 -col-sm-12 mb-4 render-map">
-                    <GoogleMap />
+        <div class="row">
+            <div class="col-12 col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                <div class="embed-responsive embed-responsive-16by9 m-4">
+                    <iframe class="embed-responsive-item" :src="`https://www.youtube.com/embed/${key_video}`" allowfullscreen></iframe>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-                    <p class="description p-3 ms-4">{{details.overview}}</p>
+            <div class="col-12 col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                <div class="m-4 details">
+                    <h1 class="details-bg px-3">{{details.original_title}}</h1>
+                    <p class="details-bg px-3">Popularidade: {{details.popularity}}</p>
+                    <p class="details-bg p-2">Idioma: {{language}} | País de origem: {{origin_country}}</p>
+                    <div v-if="category==='tv'" class="row px-3">
+                        <p class="details-bg px-3">Tempporadas: {{details.number_of_seasons}} | Episódios: {{details.number_of_episodes}}</p>
+                    </div>
                 </div>
-                <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-5">
+            </div>
+            <div class="col-12 col-xs-12 col-sm-12 -col-sm-12 mb-4 render-map">
+                <GoogleMap />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                <p class="description p-3 ms-4">{{details.overview}}</p>
+            </div>
+            <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-5">
+                <img
+                    :src="`https://image.tmdb.org/t/p/w500${details.poster_path}`"
+                    :alt="details.title"
+                    :title="details.title"
+                    height="300"
+                    width="100%"
+                    class="card-img-top"
+                    draggable="false"
+                />  
+            </div>
+        </div>
+        <div v-if="category==='tv'"  class="row px-3">
+            <div v-for='serie in series' :key='serie.id' class="card p-2 my-4 col-12 col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+                <div class="card-body text-white bg-dark">
                     <img
-                        :src="`https://image.tmdb.org/t/p/w500${details.poster_path}`"
-                        :alt="details.title"
-                        :title="details.title"
+                        :src="`https://image.tmdb.org/t/p/w500${serie.poster_path}`"
+                        :alt="serie.name"
+                        :title="serie.name"
                         height="300"
-                        width="100%"
+                        width="200"
                         class="card-img-top"
                         draggable="false"
-                    />  
-                </div>
-            </div>
-            <div v-if="category==='tv'"  class="row px-3">
-                <div v-for='serie in series' :key='serie.id' class="card p-2 my-4 col-12 col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
-                    <div class="card-body text-white bg-dark">
-                        <img
-                            :src="`https://image.tmdb.org/t/p/w500${serie.poster_path}`"
-                            :alt="serie.name"
-                            :title="serie.name"
-                            height="300"
-                            width="200"
-                            class="card-img-top"
-                            draggable="false"
-                        />
-                        <div class="card-body text-white bg-da${url}${this.category}/${this.id}?api_key=${MY_KEY}&append_to_response=videosrk">
-                            <h1 class="card-title">{{serie.name}}</h1>
-                            <h4 class="card-text">Temporada: {{serie.season_number}}</h4>
-                            <h5 class="card-text">Episodios: {{serie.episode_count}}</h5>
-                            <p class="card-text">Lançamento: {{serie.air_date}}</p>
-                            <p class="card-text">{{serie.overview}}</p>
-                        </div>
+                    />
+                    <div class="card-body text-white bg-da${url}${this.category}/${this.id}?api_key=${MY_KEY}&append_to_response=videosrk">
+                        <h1 class="card-title">{{serie.name}}</h1>
+                        <h4 class="card-text">Temporada: {{serie.season_number}}</h4>
+                        <h5 class="card-text">Episodios: {{serie.episode_count}}</h5>
+                        <p class="card-text">Lançamento: {{serie.air_date}}</p>
+                        <p class="card-text">{{serie.overview}}</p>
                     </div>
                 </div>
             </div>
@@ -76,16 +71,14 @@
     </div>
 </template>
 <script>
-  import axios from 'axios';
-  import GoogleMap from './Map.vue';
-import App from '../App.vue';
-  let MY_KEY = '7ae0d6972de076eeac5a490626643a5f';
-  let url = `https://api.themoviedb.org/3/`;
+    import axios from 'axios';
+    import GoogleMap from './Map.vue';
+    let MY_KEY = '7ae0d6972de076eeac5a490626643a5f';
+    let url = `https://api.themoviedb.org/3/`;
   export default {
     name: "MyWatch",
     components: {
     GoogleMap,
-    App
 },
     props: {
         id: Number,
@@ -115,7 +108,13 @@ import App from '../App.vue';
                 this.loading = false
             });
         }, 1000);
+
     },
+    methods: {
+            loadMainPage(){
+                window.location = "http://localhost:8080/";
+        }
+    }
 }
 </script>
 <style>
